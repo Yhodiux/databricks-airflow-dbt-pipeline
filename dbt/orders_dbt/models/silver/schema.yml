@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: silver_orders
+    description: "Clean and deduplicated orders from the staging layer."
+
+    columns:
+      - name: order_id
+        description: "Unique identifier for each order."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: customer_id
+        description: "Identifier of the customer who placed the order."
+        data_tests:
+          - not_null

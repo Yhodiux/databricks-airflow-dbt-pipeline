@@ -20,7 +20,9 @@ venv/
 .DS_Store
 Thumbs.db
 
-# dbt (para mañana)
-dbt/target/
-dbt/logs/
-dbt_packages/
+# dbt
+dbt/**/target/
+dbt/**/logs/
+dbt/**/dbt_packages/
+dbt/**/.venv/
+**/profiles.yml
