@@ -1,6 +1,8 @@
 from airflow.sdk import DAG, task
 from airflow.providers.databricks.operators.databricks import DatabricksRunNowOperator
+from airflow.providers.standard.operators.bash import BashOperator
 from datetime import datetime
+
 
 with DAG(
     dag_id="primer_dag",
@@ -19,8 +21,17 @@ with DAG(
         job_id=219467251318228,
     )
 
+    dbt_build = BashOperator(
+        task_id="dbt_build",
+        bash_command="""
+        dbt build \
+          --project-dir /opt/airflow/dbt/orders_dbt \
+          --profiles-dir /opt/airflow/dbt/orders_dbt/config
+        """,
+    )
+
     @task
     def fin():
-        print("Pipeline de Databricks terminado correctamente")
+        print("Pipeline Databricks + dbt terminado correctamente")
 
-    inicio() >> ejecutar_databricks >> fin()
+    inicio() >> ejecutar_databricks >> dbt_build >> fin()

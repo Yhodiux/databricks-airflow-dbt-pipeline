@@ -26,3 +26,4 @@ dbt/**/logs/
 dbt/**/dbt_packages/
 dbt/**/.venv/
 **/profiles.yml
+!dbt/orders_dbt/config/profiles.yml
